@@ -35,3 +35,11 @@ CREATE TABLE IF NOT EXISTS `dbt`.`sites`(
     `entry_fee` FLOAT NOT NULL,
     PRIMARY KEY (site_id)
 ) ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `dbt`.`pack_sites`(
+    `pack_id` INT NOT NULL,
+    `site_id` INT NOT NULL,
+    FOREIGN KEY (pack_id) REFERENCES travel_packs(pack_id),
+    FOREIGN KEY (site_id) REFERENCES sites(site_id),
+    PRIMARY KEY (pack_id, site_id)
+) ENGINE = InnoDB;
