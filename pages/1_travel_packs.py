@@ -17,7 +17,7 @@ def create_table():
 ) ENGINE = InnoDB;""")
 
 def add_data(values):
-    c.execute('INSERT INTO travel_packs(origin, destination, num_days, iteneary_costs, departure_timestamp, return_timestamp) VALUES(%s, %s, %s, %s, %s, %s)', values)
+    c.execute('INSERT INTO travel_packs(origin, destination, num_days, iteneary_costs, departure_timestamp, return_timestamp, slots_left) VALUES(%s, %s, %s, %s, %s, %s, %s)', values)
     db.commit()
 
 
@@ -45,14 +45,15 @@ def create():
     iteneary_costs = st.number_input("Estimated Iteneary Costs(in Rs): ")
     departure_timestamp = st.date_input("Departure Date and Time: ")
     return_timestamp = st.date_input("Return Date and Time: ")
+    slots_left = st.number_input("Enter number of slots: ", value=3)
     if st.button("Add Travel Pack"):
-        add_data((origin, destination, num_days, iteneary_costs, departure_timestamp, return_timestamp))
+        add_data((origin, destination, num_days, iteneary_costs, departure_timestamp, return_timestamp, slots_left))
         st.success("Successfully added record!")
 
 
 def delete():
     data = view()
-    st.dataframe(pd.DataFrame(data, columns = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp"]))
+    st.dataframe(pd.DataFrame(data, columns = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp", "slots_left"]))
     user_ids = [i[0] for i in data]
     choice = st.selectbox('Select user to delete', user_ids)
     if st.button('Delete Record'):
@@ -62,12 +63,12 @@ def delete():
 
 def edit():
     data = view()
-    st.dataframe(pd.DataFrame(data, columns = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp"]))
+    st.dataframe(pd.DataFrame(data, columns = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp", "slots_left"]))
     user_ids = [i[0] for i in data]
     choice = st.selectbox('Select user_id', user_ids)
     data = get_user(choice)
     if data:
-        attri = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp"]
+        attri = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp", "slots_left"]
         attrichoice = st.selectbox('Select attribute to update', attri)
         updated_attri = st.text_input(f"Enter a new value for {attrichoice}")
         if updated_attri == '':
@@ -94,7 +95,7 @@ def main():
             data = view()
         except Exception as e:
             raise e
-        df = pd.DataFrame(data, columns = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp"])
+        df = pd.DataFrame(data, columns = ["pack_id", "origin", "destination", "num_days", "iteneary_costs", "departure_timestamp", "return_timestamp", "slots_left"])
         st.dataframe(df)
     
     elif choice == 'Remove':
