@@ -6,7 +6,7 @@ from mysql.connector.errors import IntegrityError
 
 def create_table():
     c.execute(f"""
-        CREATE TABLE IF NOT EXISTS `dbt`.`user_packs`(
+        CREATE TABLE IF NOT EXISTS `dbms`.`user_packs`(
             `pack_id` INT NOT NULL,
             `user_id` INT NOT NULL,
             FOREIGN KEY (pack_id) REFERENCES travel_packs(pack_id),
@@ -134,9 +134,9 @@ def main():
 if __name__ == '__main__':
     db = mysql.connector.connect(
         host = 'localhost',
-        user = 'dbt',
-        password = 'dbt',
-        database = 'dbt'
+        user = 'dbms',
+        password = 'dbms',
+        database = 'dbms'
     )
     c = db.cursor()
 

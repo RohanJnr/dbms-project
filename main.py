@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def create_table():
-    c.execute(f"""CREATE TABLE IF NOT EXISTS `dbt`.`users`(
+    c.execute(f"""CREATE TABLE IF NOT EXISTS `dbms`.`users`(
     `user_id` INT NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(128) NOT NULL,
     `last_name` VARCHAR(128) NOT NULL,
@@ -107,9 +107,9 @@ def main():
 if __name__ == '__main__':
     db = mysql.connector.connect(
         host = 'localhost',
-        user = 'dbt',
-        password = 'dbt',
-        database = 'dbt'
+        user = 'dbms',
+        password = 'dbms',
+        database = 'dbms'
     )
     c = db.cursor()
 

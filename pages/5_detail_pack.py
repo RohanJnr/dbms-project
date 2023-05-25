@@ -6,9 +6,9 @@ from collections import defaultdict
 
 db = mysql.connector.connect(
     host = 'localhost',
-    user = 'dbt',
-    password = 'dbt',
-    database = 'dbt'
+    user = 'dbms',
+    password = 'dbms',
+    database = 'dbms'
 )
 
 c = db.cursor()

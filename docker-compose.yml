@@ -5,10 +5,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: dbt
-      MYSQL_DATABASE: dbt
-      MYSQL_USER: dbt
-      MYSQL_PASSWORD: dbt
+      MYSQL_ROOT_PASSWORD: dbms
+      MYSQL_DATABASE: dbms
+      MYSQL_USER: dbms
+      MYSQL_PASSWORD: dbms
     volumes:
       - my-db:/var/lib/mysql
 
@@ -22,7 +22,7 @@ services:
       PMA_HOST: mysql
       PMA_PORT: 3306
       PMA_USER: root
-      PMA_PASSWORD: dbt
+      PMA_PASSWORD: dbms
 
     depends_on:
       - "mysql"

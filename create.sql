@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `dbt`.`users`(
+CREATE TABLE IF NOT EXISTS `dbms`.`users`(
     `user_id` INT NOT NULL AUTO_INCREMENT,
     `first_name` VARCHAR(128) NOT NULL,
     `last_name` VARCHAR(128) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `dbt`.`users`(
     PRIMARY KEY(`user_id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `dbt`.`travel_packs`(
+CREATE TABLE IF NOT EXISTS `dbms`.`travel_packs`(
     `pack_id` INT NOT NULL AUTO_INCREMENT,
     `origin` VARCHAR(128) NOT NULL,
     `destination` VARCHAR(128) NOT NULL,
@@ -21,14 +21,14 @@ CREATE TABLE IF NOT EXISTS `dbt`.`travel_packs`(
     PRIMARY KEY(`pack_id`)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `dbt`.`user_packs`(
+CREATE TABLE IF NOT EXISTS `dbms`.`user_packs`(
     `pack_id` INT NOT NULL,
     `user_id` INT NOT NULL,
     FOREIGN KEY (pack_id) REFERENCES travel_packs(pack_id),
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `dbt`.`sites`(
+CREATE TABLE IF NOT EXISTS `dbms`.`sites`(
     `site_id` INT NOT NULL AUTO_INCREMENT,
     `site_name` VARCHAR(128) NOT NULL,
 	`address` VARCHAR(256) NOT NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `dbt`.`sites`(
     PRIMARY KEY (site_id)
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS `dbt`.`pack_sites`(
+CREATE TABLE IF NOT EXISTS `dbms`.`pack_sites`(
     `pack_id` INT NOT NULL,
     `site_id` INT NOT NULL,
     FOREIGN KEY (pack_id) REFERENCES travel_packs(pack_id),
