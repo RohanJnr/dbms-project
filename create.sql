@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `dbt`.`users`(
     `date_of_birth` DATE NOT NULL,
     `gender` VARCHAR(8) NOT NULL,
     `email` VARCHAR(128) NOT NULL,
-    `phone` VARCHAR(15) NOT NULL CHECK (`phone` REGEXP '^(\+91)?[1-9][0-9]{9}$'),
+    `phone` VARCHAR(15) NOT NULL,
     PRIMARY KEY(`user_id`)
 ) ENGINE = InnoDB;
 
@@ -17,6 +17,7 @@ CREATE TABLE IF NOT EXISTS `dbt`.`travel_packs`(
     `iteneary_costs` INT NOT NULL,
     `departure_timestamp` DATE NOT NULL,
     `return_timestamp` DATE NOT NULL,
+    `slots_left` INT NOT NULL DEFAULT 3,
     PRIMARY KEY(`pack_id`)
 ) ENGINE = InnoDB;
 

@@ -6,41 +6,41 @@ from mysql.connector.errors import IntegrityError
 
 def create_table():
     c.execute(f"""
-        CREATE TABLE IF NOT EXISTS `dbt`.`user_packs`(
+        CREATE TABLE IF NOT EXISTS `dbt`.`pack_sites`(
             `pack_id` INT NOT NULL,
             `site_id` INT NOT NULL,
             FOREIGN KEY (pack_id) REFERENCES travel_packs(pack_id),
-            FOREIGN KEY (site_idsite_id) REFERENCES sites(site_id),
+            FOREIGN KEY (site_id) REFERENCES sites(site_id),
             PRIMARY KEY (pack_id, site_id)
         ) ENGINE = InnoDB;"""
     )
 
 def add_data(values):
-    c.execute('INSERT INTO user_packs(pack_id, site_id) VALUES(%s, %s)', values)
+    c.execute('INSERT INTO pack_sites(pack_id, site_id) VALUES(%s, %s)', values)
     db.commit()
 
 
 def view():
-    c.execute('select * from user_packs')
+    c.execute('select * from pack_sites')
     return c.fetchall()
 
 def delete_record(pack_id, site_id):
-    c.execute(f'delete from user_packs where pack_id = %s and site_id = %s', (pack_id, site_id))
+    c.execute(f'delete from pack_sites where pack_id = %s and site_id = %s', (pack_id, site_id))
     db.commit()
 
 def update(attribute, new_value, pack_id, site_id):
-    c.execute(f'update user_packs SET `{attribute}` = "{new_value}" where pack_id="{pack_id}" and site_id = "{site_id}"')
+    c.execute(f'update pack_sites SET `{attribute}` = "{new_value}" where pack_id="{pack_id}" and site_id = "{site_id}"')
     db.commit()
 
 def get_user(pack_id, site_id):
-    c.execute('select * from user_packs where pack_id = %s and site_id = %s', (pack_id, site_id))
+    c.execute('select * from pack_sites where pack_id = %s and site_id = %s', (pack_id, site_id))
     return c.fetchall()
 
 
 def create():
     pack_id_choice = st.number_input('Enter pack id', value=0)
-    site_id_choice = st.number_input('Enter user id', value=0)
-    if st.button("Add User"):
+    site_id_choice = st.number_input('Enter site id', value=0)
+    if st.button("Add Site to Pack"):
         try:
             add_data((pack_id_choice, site_id_choice))
         except Exception as e:
@@ -99,7 +99,7 @@ def edit():
             st.success("Updated!")
 
 def viewList():
-    c.execute('select pack_id, GROUP_CONCAT(CONCAT(sites.site_id, '|', site.site_name)) from user_packs join sites on sites.site_id=user_packs.site_id group by pack_id;')
+    c.execute('select pack_id, GROUP_CONCAT(CONCAT(sites.site_id, '|', sites.site_name)) from pack_sites join sites on sites.site_id=pack_sites.site_id group by pack_id;')
     return c.fetchall()
 
 

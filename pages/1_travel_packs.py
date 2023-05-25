@@ -12,6 +12,7 @@ def create_table():
     `iteneary_costs` INT NOT NULL,
     `departure_timestamp` DATE NOT NULL,
     `return_timestamp` DATE NOT NULL,
+    `slots_left` INT NOT NULL DEFAULT 3,
     PRIMARY KEY(`pack_id`)
 ) ENGINE = InnoDB;""")
 
