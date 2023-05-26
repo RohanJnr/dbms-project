@@ -2,16 +2,14 @@ services:
   mysql:
     image: mysql:latest
     container_name: mysql
+    restart: always
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: dbms
-      MYSQL_DATABASE: dbms
-      MYSQL_USER: dbms
-      MYSQL_PASSWORD: dbms
-    volumes:
-      - my-db:/var/lib/mysql
-
+      MYSQL_ROOT_PASSWORD: "dbms"
+      MYSQL_DATABASE: "dbms"
+      MYSQL_USER: "dbms"
+      MYSQL_PASSWORD: "dbms"
 
   phpmyadmin:
     image: phpmyadmin:latest
@@ -19,15 +17,12 @@ services:
       - "8080:80"
     environment:
       PMA_ARBITRARY: 1
-      PMA_HOST: mysql
+      PMA_HOST: "mysql"
       PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: dbms
+      PMA_USER: "root"
+      PMA_PASSWORD: "dbms"
 
     depends_on:
       - "mysql"
 
     restart: always
-
-volumes:
-  my-db:
