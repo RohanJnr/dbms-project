@@ -11,7 +11,7 @@ def create_table():
     `date_of_birth` DATE NOT NULL,
     `gender` VARCHAR(8) NOT NULL,
     `email` VARCHAR(128) NOT NULL,
-    `phone` VARCHAR(15) NOT NULL CHECK (`phone` REGEXP '^(\+91)?[1-9][0-9]{9}$'),
+    `phone` VARCHAR(15) NOT NULL,
     PRIMARY KEY(`user_id`)
 ) ENGINE = InnoDB;""")
 

@@ -23,7 +23,7 @@ DELIMITER ;
 DELIMITER //
 
 CREATE TRIGGER check_phone_number_trigger
-BEFORE INSERT OR UPDATE ON users
+BEFORE INSERT ON users
 FOR EACH ROW
 BEGIN
     IF NEW.phone REGEXP '^(9|8|7|6)[0-9]{9}$' = 0 THEN

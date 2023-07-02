@@ -99,7 +99,7 @@ def edit():
             st.success("Updated!")
 
 def viewList():
-    c.execute('select pack_id, GROUP_CONCAT(CONCAT(sites.site_id, '|', sites.site_name)) from pack_sites join sites on sites.site_id=pack_sites.site_id group by pack_id;')
+    c.execute('select pack_id, GROUP_CONCAT(sites.site_name) from pack_sites join sites on sites.site_id=pack_sites.site_id group by pack_id;')
     return c.fetchall()
 
 
@@ -117,7 +117,7 @@ def main():
     elif choice == 'View':
         st.subheader("Information in Table")
         try:
-            data = view()
+            data = viewList()
         except Exception as e:
             raise e
         df = pd.DataFrame(data, columns = ["pack_id", "site_id"])
